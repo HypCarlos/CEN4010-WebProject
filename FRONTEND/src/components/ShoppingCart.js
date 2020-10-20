@@ -41,7 +41,7 @@ class ShoppingCartClass extends Component{
         </tr>
     
     </table>
-    <h1>Hello</h1>
+    
     <itemNum/>
     </div>
     
