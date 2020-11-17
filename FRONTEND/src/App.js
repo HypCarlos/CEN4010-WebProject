@@ -33,9 +33,9 @@ function App() {
             </div>
         </div>
         <div className="header-links"> 
-        <Route path="/ShoppingCart/" component={ShoppingCart}/>
+        <Route path="/ShoppingCart/:id?" component={ShoppingCart}/>
                 <a class = "cart-btn"href="ShoppingCart">Cart 🛒</a>
-                <div class = "cart-items">(0)</div>
+  <div class = "cart-items">{}</div>
 
         <Route path="/WishList/" component={WishList}/>
                 <a href="WishList">Wish List ⭐</a>
@@ -47,9 +47,7 @@ function App() {
     </div>
     </header>
 
-    <aside>
-        Shopping Categories 
-    </aside>
+    
 
     <main className="main">
         <div className="content">

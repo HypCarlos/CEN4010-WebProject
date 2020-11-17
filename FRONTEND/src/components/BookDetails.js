@@ -4,11 +4,12 @@ import '../App.css';
 import {Link, Router} from 'react-router-dom';
 
 
-import showCartBooks from "./showCartBooks"
 
 function BookDetails(props){
+    const [qty, setQty] = useState(1);
     const [books, setBooks] = useState([])
     const [id, setId] = useState()
+    
 
     useEffect(() => {
         axios
@@ -25,10 +26,14 @@ function BookDetails(props){
 const [cart,setCart] = useState([]);
 const [page, setPage] = useState('products');
 
-const addToCart = (books) => {
-    alert( books.name + " has been added to your Cart! " + " There are " + (cart.length + 1) + " items in your cart." );
-setCart([...cart,books]);
-console.log(cart);
+// const addToCart = (books) => {
+//     alert( books.name + " has been added to your Cart! " + " There are " + (cart.length + 1) + " items in your cart." );
+// setCart([...cart,books]);
+// console.log(cart);
+// }
+
+const handleAddToCart = () => {
+    props.history.push("/ShoppingCart/" + props.match.params.bookid + "?qty=" + qty);
 }
 
 function itemNum() {
@@ -38,21 +43,7 @@ function itemNum() {
 
 
 
-const renderCart = () => (
-    <>
-    <h1> Cart </h1>
-    <div className= "products"></div>
-    {cart.map((books,index) => (
-        <div className = "product" key={index}>
-            <h3>{books.name}</h3>
-            <h4>{books.price}</h4>
-            <img src = {books.image} alt= {books.name} ></img>
-    
-            </div>
-    ))}
-       
-    </>
-);
+
 
 return (
 
@@ -60,7 +51,7 @@ return (
     <header>
         
     </header>
-    {page === 'cart' && renderCart}
+    
     <div className = "back-to-home">
     <Link to="/" Back to home page></Link>
     </div>
@@ -93,12 +84,12 @@ return (
                 <ul>
                     <li>
                         Price: {books.price}
-                     <button onClick = {() => addToCart(books) }className = "Atc-button">Add to Cart</button>
+                     <button onClick = {handleAddToCart} className = "Atc-button">Add to Cart</button>
                         
-                     <button onClick = {() => renderCart(cart) } className = "Atc-button">Add to Wish List</button>
+                     <button className = "Atc-button">Add to Wish List</button>
                     </li>
                     <li>
-                        Qty: <select>
+                        Qty: <select value= {qty} onChange= {(e) => {setQty(e.target.value)}}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
