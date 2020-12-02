@@ -2,11 +2,12 @@ import React, {useState, useEffect } from 'react'
 import axios from 'axios'
 import '../App.css';
 import {Link, Router} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 function BookDetails(props){
-    const [qty, setQty] = useState(1);
+    const [qty, setQty] = useState(1);      // DEFAULT QTY = 1  
     const [books, setBooks] = useState([])
     const [id, setId] = useState()
     
@@ -25,12 +26,10 @@ function BookDetails(props){
 
 const [cart,setCart] = useState([]);
 const [page, setPage] = useState('products');
+const productList = useSelector(state => state.productList);
+const {products, loading, error} = productList;
+const dispatch = useDispatch();
 
-// const addToCart = (books) => {
-//     alert( books.name + " has been added to your Cart! " + " There are " + (cart.length + 1) + " items in your cart." );
-// setCart([...cart,books]);
-// console.log(cart);
-// }
 
 const handleAddToCart = () => {
     props.history.push("/ShoppingCart/" + props.match.params.bookid + "?qty=" + qty);
@@ -39,9 +38,6 @@ const handleAddToCart = () => {
 function itemNum() {
     return <h1>{cart.length}</h1>
 }
-
-
-
 
 
 

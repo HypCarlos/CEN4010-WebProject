@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import '../App.css'
 
 
-import BookDetails from "./BookDetails"
 
 
 
@@ -20,11 +19,19 @@ function ShoppingCart(props) {
     const removeFromCartHandler = (productId) => {
         dispatch(removeFromCart(productId));
     }
+
+
+    const saveForLater = (productId) => {
+        dispatch(saveForLater(productId));
+    }
+
+
 useEffect(() =>{
     if(productId) {
         dispatch(addToCart(productId,qty));
     }
 }, [])
+
 const checkoutHandler = () => {
     props.history.push("/signin?/Information");
 }
@@ -34,11 +41,11 @@ const checkoutHandler = () => {
             <ul className = "cart-list-container">
                 <h2 classname ="Cart-banner"r>Shopping Cart</h2>
                 <li>
-                {/* <p>ADDED TO CART: ProductID: {productId} Quantity: {qty} </p> */}
+                {/* <p>`ADDE`D TO CART: ProductID: {productId} Quantity: {qty} </p> */}
                 {/* <div>
                     Price
                 </div> */}
-                </li>
+                </li >
                 {
                    cartItems.length ===0 ? 
                     <div>
@@ -67,6 +74,10 @@ const checkoutHandler = () => {
                                 <button type= "button" className ="remove" onClick= {() => removeFromCartHandler(item.product)}>
                                     Remove
                                 </button>
+                                
+                                <button className ="remove" onClick= {() => saveForLater(item.product)}>
+                                    Save for later
+                                    </button>
                             </div>
                         </div>
                         <div>
@@ -94,52 +105,3 @@ const checkoutHandler = () => {
 }
 
 export default ShoppingCart;
-// class ShoppingCartClass extends Component{
-
-    
-//     constructor()
-//     {
-//         super();
-//         this.state = {
-//             books : []          // cart
-//         }
-
-//     }
-//         componentDidMount()
-//         {
-//             fetch('/books')
-//                 .then(res => res.json())
-//                 .then(books => this.setState({books}, () => console.log('books fetched..', books)));
-//         }
-
-       
-        
-//     render(props)
-//     {
-//         return <div className = "Cart"> 
-//     <h1 className = "Cart-header">Shopping Cart</h1>
-//     <div className = "Products">
-//     <table>
-//         <tr>
-//             <tr className = "headings"></tr>
-//             <th>Product</th>
-//             <th>Quantity</th>
-//             <th>Price</th>
-//         </tr>
-    
-//     </table>
-
-//     <itemNum/>
-   
-  
-//     </div>
-    
-    
-        
-//         </div>
-        
-//     }
-// }
-
-// export default ShoppingCartClass;
-
